@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    
+<head>
+    <meta charset="utf-8">
+    <title>EnergieDigital Rechner</title>
+    <link rel="stylesheet" href="./css/vertical.css">
+    <link rel="stylesheet" href="./css/creator-verticalUI.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;700&display=swap' rel='stylesheet'>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+    <div id="wrapper" class="flex row">
+        <div id="sidebar" class="mainSidebar">
+            <div class="sidebar-header row">
+                <img src="./energie_digital_logo.svg" alt="EnergieDigital logo" height="50" width="100">
+                <button class="collapse-button noborder" id="collapseMenu" aria-label="Collapse sidebar">
+                    <svg class="icon" viewBox="0 0 50 32">
+                        <path d="M49,4H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,4,49,4z"></path>
+                        <path d="M49,16H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,16,49,16z"></path>
+                        <path d="M49,28H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,28,49,28z"></path>
+                        <path d="M8.1,22.8c-0.3,0-0.5-0.1-0.7-0.3L0.7,15l6.7-7.8c0.4-0.4,1-0.5,1.4-0.1c0.4,0.4,0.5,1,0.1,1.4L3.3,15l5.5,6.2   c0.4,0.4,0.3,1-0.1,1.4C8.6,22.7,8.4,22.8,8.1,22.8z"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="sidebar-buttons flex row" tabindex="1">
+                <div class="btn">
+                    <label for="uploadFile" class="flex row font-xs aligned-centre tooltip">
+                      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path id="path01" d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/>
+                      </svg>
+                      <div class="tooltiptext">Choose file from computer</div>
+                      <input type="file" accept='application/json' id="btn_loadFile" />
+                    </label>
+                </div>
+                <div class="btn flex row pos-relative tooltip" role="button">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+                    <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+                  </svg>
+                  <div class="tooltiptext">Create a new property</div>
+                </div>
+                <div class="btn pos-relative tooltip">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3v18h18"/>
+                    <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
+                  </svg>
+                  <div class="tooltiptext">Calculate</div>
+                </div>
+                <div class="btn pos-relative tooltip">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                  </svg>
+                  <div class="tooltiptext">Update charts</div>
+                </div>
+
+            </div>
+
+            <div class="scrollable" tabindex="-1">
+                <div class="scrollable-content-wrapper">
+                  <div class="scrollable-content flex col">
+                    <div class="container mdc-card property" id="1"><div id="nameDiv_1" class="nameDiv">property-1</div><div class="deleteItem">DELETE</div><section class="editSection"><div class="inputContainer"><label for="1_name">Name</label><div class="inputUnits"><div style="margin-right: 4px;"></div><input id="1_name" style="max-width: 100px;"></div></div><div class="inputContainer hiddenInput"><label for="1_id">ID</label><div class="inputUnits"><div style="margin-right: 4px;"></div><input id="1_id"></div></div><div class="inputContainer"><label for="1_area">Wohnfläche</label><div class="inputUnits"><div style="margin-right: 4px;">m² </div><input id="1_area"></div></div></section><div class="container mdc-card building" id="2"><div id="nameDiv_2" class="nameDiv">building-2</div><div class="deleteItem">DELETE</div><section class="editSection"><div class="inputContainer"><label for="2_name">Name</label><div class="inputUnits"><div style="margin-right: 4px;"></div><input id="2_name" style="max-width: 100px;"></div></div><div class="inputContainer hiddenInput"><label for="2_id">ID</label><div class="inputUnits"><div style="margin-right: 4px;"></div><input id="2_id"></div></div><div class="inputContainer"><label for="2_type">Haustyp (Wohnen, Gewerbe)</label><div class="inputUnits dropdown"><div style="margin-right: 4px;"></div><input id="2_type"><div class="dropdown-list"><a>1 - Residential</a><a>2 - Commercial</a><a>3 - Mixed</a></div></div></div><div class="inputContainer"><label for="2_roofarea">Dachfläche</label><div class="inputUnits"><div style="margin-right: 4px;">m² </div><input id="2_roofarea"></div></div><div class="inputContainer"><label for="2_pvUsage_perc">PV Anteil am Dach</label><div class="inputUnits"><div style="margin-right: 4px;">% </div><input id="2_pvUsage_perc"></div></div></section><div class="mdc-card unit" id="3"><div id="nameDiv_3" class="nameDiv">unit-3</div><div class="deleteItem">DELETE</div><section class="editSection"><div class="inputContainer"><label for="3_name">Name</label><div class="inputUnits"><div style="margin-right: 4px;"></div><input id="3_name" style="max-width: 100px;"></div></div><div class="inputContainer hiddenInput"><label for="3_id">ID</label><div class="inputUnits"><div style="margin-right: 4px;"></div><input id="3_id"></div></div><div class="inputContainer"><label for="3_occupancy">Bewohner</label><div class="inputUnits"><div style="margin-right: 4px;"></div><input id="3_occupancy"></div></div><div class="inputContainer"><label for="3_area">Wohnfläche</label><div class="inputUnits"><div style="margin-right: 4px;">m² </div><input id="3_area"></div></div><div class="inputContainer"><label for="3_unitType">Typ (Wohnen, Gewerbe)</label><div class="inputUnits dropdown"><div style="margin-right: 4px;"></div><input id="3_unitType"><div class="dropdown-list"><a>1 - Residential</a><a>2 - Commercial</a></div></div></div><div class="inputContainer"><label for="3_eVehicles">E-Autos</label><div class="inputUnits"><div style="margin-right: 4px;"></div><input id="3_eVehicles"></div></div><div class="inputContainer"><label for="3_shd">Heizwärmebedarf</label><div class="inputUnits"><div style="margin-right: 4px;">MWh p.a. </div><input id="3_shd"></div></div><div class="inputContainer hiddenInput"><label for="3_hasShTank">Wärmespeicher Ja/Nein</label><div class="inputUnits"><div style="margin-right: 4px;"></div><input id="3_hasShTank"></div></div><div class="inputContainer"><label for="3_dwd">Warmwasserbedarf</label><div class="inputUnits"><div style="margin-right: 4px;">MWh p.a. </div><input id="3_dwd"></div></div><div class="inputContainer hiddenInput"><label for="3_hasDwTank">Wasserspeicher Ja/Nein</label><div class="inputUnits"><div style="margin-right: 4px;"></div><input id="3_hasDwTank"></div></div><div class="inputContainer"><label for="3_aed">Strombedarf</label><div class="inputUnits"><div style="margin-right: 4px;">MWh p.a.</div><input id="3_aed"></div></div><div class="inputContainer"><label for="3_shdProductionType">Heizwärmebereitung</label><div class="inputUnits dropdown"><div style="margin-right: 4px;"></div><input id="3_shdProductionType"><div class="dropdown-list"><a>1 - Fossil fuel boiler</a><a>2 - Biomass boiler</a><a>3 - Heat pump</a><a>4 - Power</a></div></div></div><div class="inputContainer"><label for="3_dwdProductionType">Warmwasserbereitung</label><div class="inputUnits dropdown"><div style="margin-right: 4px;"></div><input id="3_dwdProductionType"><div class="dropdown-list"><a>1 - Fossil fuel boiler</a><a>2 - Biomass boiler</a><a>3 - Heat pump</a><a>4 - Power</a></div></div></div></section></div><div class="createContainer"><div class="createItem">CREATE</div><div class="cloneItem">CLONE</div></div></div><div class="createContainer"><div class="createItem">CREATE</div><div class="cloneItem">CLONE</div></div></div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="sidebar-bottom-buttons sticky-bottom row" tabindex="0">
+              <div id="outerglider" class="flex row flex-end aligned-centre">
+                <div id="glider" class="flex row aligned-centre">
+                  <div class="font-xs padding-right">Export Data</div>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 3H6a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h4M16 17l5-5-5-5M19.8 12H9"/>
+                  </svg>
+                </div>
+                <div id="underglider" class="flex row">
+                  <div id="export-excel" class="font-w500 font-turquoise padding-15">.XLSX</div>
+                  <div id="export-json" class="font-w500 font-turquoise">.JSON</div>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        <div id="main" class="flex col">
+          <div id="topMenu" class="flex row aligned-centre pos-relative">
+            <div id="expandSidebar" class="flex row btn tooltip">
+              <button id="expandMenu">
+                <svg height="18" width="18" viewBox="0 0 34 34" focusable="false">
+                  <path d="M31,4H1C0.4,4,0,3.6,0,3s0.4-1,1-1h30c0.6,0,1,0.4,1,1S31.6,4,31,4z M31,16H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S31.6,16,31,16z M31,28H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S31.6,28,31,28z"></path>
+                </svg>
+              </button>
+              <div class="tooltiptext">Expand sidebar</div>
+            </div>
+            <div id="topMenuTitle" class="font-w500 font-big flex aligned-centre" style="padding-left: 4px;">Analysis</div>
+            <div class="halfwidth"></div>
+            <div class="rightMenu flex row fullheight bottom-aligned">
+              <div class="refreshChartBtn pos-relative tooltip" onclick="updateChartSize()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/></svg>
+                <div class="tooltiptext">Update chart size</div>
+              </div>
+              <div class="rightMenuDropdown">  
+                <div id="dropdwn_1" onclick="toggleDropdown(this.id)" class="flex row rightMenuBtn" style="padding-right: 8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                  <div class="font-xs" style="padding-left: 6px;">Switch view</div>
+                </div>
+                <div class="rightMenuDropdown-content">
+                  <div class="viewOption row aligned-centre" onclick="switchView('overview')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M21 12H3M12 3v18"/></svg>
+                    <div style="padding-left: 10px;">Overview</div>
+                  </div>
+                  <div class="viewOption row aligned-centre" onclick="switchView('presentation')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>
+                    <div style="padding-left: 10px;">Presentation</div>
+                  </div>
+                  <div class="viewOption row aligned-centre" onclick="switchView('expanded')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+                    <div style="padding-left: 10px;">Expanded</div>
+                  </div>
+                </div>
+              </div>
+              <div class="rightMenuDropdown">
+                <div id="dropdwn_2" onclick="toggleDropdown(this.id)" class="flex row rightMenuBtn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <div class="font-xs" style="padding-left: 6px;">Change date</div>
+                </div>
+                <div class="rightMenuDropdown-content notclose flex col font-xxs">
+                  <div class="flex col aligned-centre padding-5-10">
+                    <div class="padding-btm-10">Community</div>
+                    <div class="flex row aligned-centre">
+                      <div class="nowrap padding-15">Period start: </div>
+                      <div><input type="datetime-local" value="2021-06-05T20:30"></input></div>
+                    </div>
+                    <div class="flex row bottom-border padding-btm-10">
+                      <div class="padding-15">Period end: </div>
+                      <div><input type="datetime-local" value="2021-06-05T20:30"></input></div>
+                    </div>
+                  </div>
+                  <div class="flex col aligned-centre padding-5-10">
+                    <div class="padding-btm-10">Building</div>
+                    <div class="flex row">
+                      <div class="padding-15">Period start: </div>
+                      <div><input type="datetime-local" value="2021-06-05T20:30"></input></div>
+                    </div>
+                    <div class="flex row bottom-border padding-btm-10">
+                      <div class="padding-15">Period end: </div>
+                      <div><input type="datetime-local" value="2021-06-05T20:30"></input></div>
+                    </div>
+                  </div>
+                  <div class="flex col aligned-centre">
+                    <div class="padding-btm-10">Unit</div>
+                    <div class="flex row">
+                      <div class="padding-15">Period start: </div>
+                      <div><input type="datetime-local" value="2021-06-05T20:30"></input></div>
+                    </div>
+                    <div class="flex row padding-btm-10">
+                      <div class="padding-15">Period end: </div>
+                      <div><input type="datetime-local" value="2021-06-05T20:30"></input></div>
+                    </div>
+                  </div>
+                  <div class="flex row aligned-centre horizontal-center borderbox padding-5-10">
+                    <div class="flex row padding-5-10">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3f3f3f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                      <div class="font-xxs" style="padding-left: 6px;">Update charts</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="rightMenuDropdown">
+                <div id="dropdwn_3" onclick="toggleDropdown(this.id)" class="flex row rightMenuBtn">
+                  <svg width="20" height="20" fill="#3f3f3f" viewBox="0 0 24 24" focusable="false"><path d="M11.7,9.7c-0.2,0.2-0.4,0.3-0.6,0.3H8v9c0,0.6-0.4,1-1,1s-1-0.4-1-1v-9H2.9C2.4,10,2,9.6,2,9.1c0-0.2,0.1-0.5,0.3-0.6l4.1-4.1C6.7,4,7.3,4,7.6,4.3l0,0l4.1,4.1C12.1,8.8,12.1,9.4,11.7,9.7z M21.7,14.3c-0.2-0.2-0.4-0.3-0.6-0.3H18V5c0-0.6-0.4-1-1-1s-1,0.4-1,1v9h-3.1c-0.5,0-0.9,0.4-0.9,0.9c0,0.2,0.1,0.5,0.3,0.6l4.1,4.1c0.4,0.4,0.9,0.4,1.3,0l0,0l4.1-4.1C22.1,15.2,22.1,14.6,21.7,14.3z"></path></svg>
+                  <div class="font-xs" style="padding-left: 6px;">Reorder</div>
+                </div>
+                <div class="rightMenuDropdown-content margin-left-minus">
+                  <div class="viewOption row aligned-centre" onclick="moveCharttoTop('unit-chart')">Unit</div>
+                  <div class="viewOption row aligned-centre" onclick="moveCharttoTop('building-chart')">Building Demand</div>
+                  <div class="viewOption row aligned-centre nowrap" onclick="moveCharttoTop('building_prod-chart')">Building Production</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pageContent" class="flex row">
+            <div id="side-content" class="flex col">
+              <div id="analytical">
+                <div id="community-chart"></div>
+                <section id="kpiSection">
+                  <div id="kpis" class="flex col">
+                    <div class="kpiContainer">
+                      <div>Strombedarf</div>
+                      <div class="inputUnits">
+                        <div>5.08</div>
+                        <div style="margin-left: 4px;">MWh</div>
+                      </div>
+                    </div>
+                    <div class="kpiContainer">
+                      <div>Netzbezug</div>
+                      <div class="inputUnits">
+                        <div>3.31</div>
+                        <div style="margin-left: 4px;">MWh</div>
+                      </div>
+                    </div>
+                    <div class="kpiContainer">
+                      <div>Eigenverbrauch</div>
+                      <div class="inputUnits">
+                        <div>1.77</div>
+                        <div style="margin-left: 4px;">MWh</div>
+                      </div>
+                    </div>
+                    <div class="kpiContainer">
+                      <div>PV Erzeugung</div>
+                      <div class="inputUnits">
+                        <div>3.12</div>
+                        <div style="margin-left: 4px;">MWh</div>
+                      </div>
+                    </div>
+                    <div class="kpiContainer">
+                      <div>Netzeinspeisung</div>
+                      <div class="inputUnits">
+                        <div>1.35</div>
+                        <div style="margin-left: 4px;">MWh</div>
+                      </div>
+                    </div>
+                    <div class="kpiContainer">
+                      <div>Eigenverbrauchsquote</div>
+                      <div class="inputUnits">
+                        <div>34.86</div>
+                        <div style="margin-left: 4px;">%</div>
+                      </div>
+                    </div>
+                    <div class="kpiContainer">
+                      <div>Eigennutzungsgrad PV</div>
+                      <div class="inputUnits">
+                        <div>56.82</div>
+                        <div style="margin-left: 4px;">%</div>
+                      </div>
+                    </div>
+                    <div class="kpiContainer">
+                      <div>Kosteneinsparung im Jahr    </div>
+                      <div class="inputUnits">
+                        <div>421.46</div>
+                        <div style="margin-left: 4px;">EUR</div>
+                      </div>
+                    </div>
+                    <div class="kpiContainer">
+                      <div>Reduktion CO2 Emissionen</div>
+                      <div class="inputUnits">
+                        <div>442.70</div>
+                        <div style="margin-left: 4px;">kg CO2</div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+
+            <div id="charts-collection" class="flex col">
+              <div id="rightPanel">
+                <!-- master dropdown list -->
+                <div id="master_dropdown" class="masterdropdown flex flex-end aligned-centre">
+                  <button class="dropdownBtn flex row flex-end">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9c9c9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+                  </button>
+                  <div id="masterDropdown_content" class="masterDropdown-list col">
+                    <a href="#">Building 1</a>
+                    <a href="#">Unit 1</a>
+                  </div>
+                </div>
+                <div id="charts-container">
+                  <div id="unit-chart" class="uniform-chart-size"></div>
+                  <div id="building-chart" class="uniform-chart-size"></div>
+                  <div id="building_prod-chart" class="uniform-chart-size"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    <script src="./js/vertical.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/charts.js"></script>
+
+</body>
+
+</html>
